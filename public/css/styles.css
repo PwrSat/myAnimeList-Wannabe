@@ -1,0 +1,210 @@
+/* html structure */
+
+body {
+  background-color: #222222;
+  margin: 0;
+  padding: 0;
+  font-family: "Sofia Sans Semi Condensed", sans-serif;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  padding-top: 5px;
+}
+
+ul li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  color: white;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+  cursor: default;
+}
+
+button {
+  background-color: #520fff;
+  border: 0;
+  padding: 10px;
+  border-radius: 10px;
+  color: white;
+}
+
+/* index.ejs */
+
+.content {
+  color: white;
+  display: grid;
+  grid-template-columns: 3fr 1fr 1fr;
+  /* grid-template-rows: 1fr 2fr; */
+  margin-bottom: 30px;
+}
+
+.bestOfBest {
+  background-color: #3d3b3b;
+  padding: 20px;
+  grid-column: 1 / 3;
+  margin-right: 10px;
+}
+
+.bestOfBest img {
+  float: left;
+  margin-right: 10px;
+  border-radius: 10px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.personalPreference {
+  background-color: #3d3b3b;
+  padding: 20px;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.listManga {
+  background-color: #3d3b3b;
+  padding: 20px;
+  margin-top: 10px;
+  grid-column: 1 / 4;
+}
+
+.listManga ul li a {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 25px;
+  align-items: flex-start;
+}
+
+.listManga ul li img {
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.listManga ul li h3 {
+  margin: 0 0 10px 0;
+}
+
+.listManga ul li p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.carousel-bg{
+  height:200px;
+  background-repeat:no-repeat;
+  background-position:center;
+  background-size:cover;
+  border-radius:10px;
+
+  display:flex;
+  align-items:flex-end;
+}
+
+.transparent{
+  width:100%;
+  padding:15px;
+  color:white;
+
+  background:linear-gradient(
+    to top,
+    rgba(0,0,0,0.85),
+    rgba(0,0,0,0)
+  );
+}
+
+.transparent h3{
+  margin:0;
+  font-size:20px;
+}
+
+.transparent h5{
+  margin:0;
+  font-size:14px;
+  opacity:0.9;
+}
+
+.carousel-bg{
+  transition:0.3s;
+}
+
+.carousel-bg:hover{
+  transform:scale(1.02);
+}
+
+.text {
+  padding-top: 50px;
+}
+
+.pagginate {
+  width: 100%;
+  background-color: #3d3b3b;
+  grid-column: 1 / 4;
+  display: flex;
+  justify-content: center;
+}
+
+.pagginate button {
+  margin: 10px;
+  padding: 10px;
+}
+
+.transparent{
+  background-color: rgba(0, 0, 0, 0.5); 
+  height: 100%;
+  padding: 10px;
+}
+
+/* detail */
+
+.profile {
+  margin-top: 30px;
+}
+
+.profile img {
+  float: left;
+  margin-right: 30px;
+}
+
+.chapterList {
+}
+
+.chapter {
+  background-color: #3d3b3b;
+  padding: 10px;
+}
+
+.textDetail {
+  padding-left: 30px;
+}
+
+/* readComic */
+
+.title {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.comic {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.buttonRead {
+  margin-bottom: 30px;
+  text-align: center;
+}
+

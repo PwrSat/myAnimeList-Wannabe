@@ -1,0 +1,88 @@
+<%- include('partials/header.ejs') %>
+<div class="wrapper">
+  <h1>Best of the best</h1>
+  <div class="content">
+    <div class="bestOfBest">
+     <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+
+        <div class="carousel-inner">
+        <% if(locals.topAnime) {%>
+          <% topAnime.forEach((anime, index)=>{ %>
+
+            <div class="carousel-item <%= index === 0 ? 'active' : '' %>">
+
+              <div class="carousel-bg"
+                style="background-image:url('<%= anime.images.jpg.large_image_url %>')">
+
+                <div class="transparent">
+                  <h3><%= anime.title %></h3>
+                  <h5>Score: <%= anime.score %></h5>
+                </div>
+
+              </div>
+
+            </div>
+
+          <% }) %>
+        <% }else{ %>
+          Nothing to show
+        <% } %>
+  </div>
+
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </button>
+
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </button>
+
+</div>
+    </div>
+    <% if(locals.myAnimePreference) {%>
+    <div
+      class="personalPreference"
+      style="
+        background-image: linear-gradient(rgba(0, 0, 0, 0.5)), url('<%= myAnimePreference.images.jpg.large_image_url %>');
+        background-size: cover;
+        background-position: center;
+      "
+    >
+      <a href="/comic-detail" style="color: white; text-decoration: none;">
+        <p>Personal Preference</p>
+        <h3><%= myAnimePreference.title %></h3>
+      </a>
+    </div>
+    <% }else{ %>
+      Nothing to show
+    <% } %>
+    <div class="listManga">
+      <ul>
+        <% if(locals.newAnime) {%>
+          <% newAnime.forEach(function (anime) { %>
+        <li>
+          <a href="/comic-detail">
+            <img  src="<%= anime.images.jpg.image_url %>"  alt="picture" height="200px" />
+            <div class="text">
+              <h3><%= anime.title %></h3>
+              <h5><%= anime.score %></h5>
+              <p>
+                <%= anime.synopsis %>
+              </p>
+            </div>
+          </a>
+        </li>
+        <% }) %>
+        <% }else{ %>
+          Nothing to show
+        <% } %>
+      </ul>
+    </div>
+    <div class="pagginate">
+      <button>Prev</button>
+      <button>Next</button>
+    </div>
+  </div>
+</div>
+
+<%- include('partials/footer.ejs') %>
