@@ -58,30 +58,58 @@
     <% } %>
     <div class="listManga">
       <ul>
-        <% if(locals.newAnime) {%>
-          <% newAnime.forEach(function (anime) { %>
-        <li>
-          <a href="/comic-detail">
-            <img  src="<%= anime.images.jpg.image_url %>"  alt="picture" height="200px" />
-            <div class="text">
-              <h3><%= anime.title %></h3>
-              <h5><%= anime.score %></h5>
-              <p>
-                <%= anime.synopsis %>
-              </p>
-            </div>
-          </a>
-        </li>
+
+      <% if (pagedAnime && pagedAnime.length > 0) { %>
+
+        <% pagedAnime.forEach(function(anime){ %>
+
+          <li>
+            <a href="/comic-detail">
+
+              <img src="<%= anime.images.jpg.image_url %>" height="200px"/>
+
+              <div class="text">
+
+                <h3><%= anime.title %></h3>
+
+                <h5>Score: <%= anime.score %></h5>
+
+                <p>
+                  <%= anime.synopsis 
+                    ? anime.synopsis.substring(0,120) + "..." 
+                    : "No synopsis" %>
+                </p>
+
+              </div>
+
+            </a>
+          </li>
+
         <% }) %>
-        <% }else{ %>
-          Nothing to show
-        <% } %>
+
+      <% } else { %>
+
+        <p>Nothing to show</p>
+
+      <% } %>
+
       </ul>
     </div>
     <div class="pagginate">
-      <button>Prev</button>
-      <button>Next</button>
-    </div>
+
+<% if (pagination && pagination.current_page > 1) { %>
+<a href="/?page=<%= pagination.current_page - 1 %>&limit=5">
+<button>Prev</button>
+</a>
+<% } %>
+
+<% if (pagination && pagination.has_next_page) { %>
+<a href="/?page=<%= pagination.current_page + 1 %>&limit=5">
+<button>Next</button>
+</a>
+<% } %>
+
+</div>
   </div>
 </div>
 
