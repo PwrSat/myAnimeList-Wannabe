@@ -9,19 +9,21 @@
         <% if(locals.topAnime) {%>
           <% topAnime.forEach((anime, index)=>{ %>
 
-            <div class="carousel-item <%= index === 0 ? 'active' : '' %>">
-
-              <div class="carousel-bg"
-                style="background-image:url('<%= anime.images.jpg.large_image_url %>')">
-
-                <div class="transparent">
-                  <h3><%= anime.title %></h3>
-                  <h5>Score: <%= anime.score %></h5>
+            <a href="/comic-detail/<%= anime.mal_id %>">
+              <div class="carousel-item <%= index === 0 ? 'active' : '' %>">
+                
+                <div class="carousel-bg"
+                  style="background-image:url('<%= anime.images.jpg.large_image_url %>')">
+  
+                  <div class="transparent">
+                    <h3><%= anime.title %></h3>
+                    <h5>Score: <%= anime.score %></h5>
+                  </div>
+  
                 </div>
-
+  
               </div>
-
-            </div>
+            </a>
 
           <% }) %>
         <% }else{ %>
@@ -48,7 +50,7 @@
         background-position: center;
       "
     >
-      <a href="/comic-detail" style="color: white; text-decoration: none;">
+      <a href="/comic-detail/<%= myAnimePreference.mal_id %>" style="color: white; text-decoration: none;">
         <p>Personal Preference</p>
         <h3><%= myAnimePreference.title %></h3>
       </a>
@@ -64,7 +66,7 @@
         <% pagedAnime.forEach(function(anime){ %>
 
           <li>
-            <a href="/comic-detail">
+            <a href="/comic-detail/<%= anime.mal_id %>">
 
               <img src="<%= anime.images.jpg.image_url %>" height="200px"/>
 

@@ -39,7 +39,7 @@ app.get("/", async (req, res) => {
     const [topAnime, myAnimePreference, pagePagination] = await Promise.all([
       fetchWithCache("topAnime", "https://api.jikan.moe/v4/top/anime?limit=5"),
       fetchWithCache("myAnimePreference","https://api.jikan.moe/v4/anime/55830"),
-      fetchWithCache(`animePage${page}`,`https://api.jikan.moe/v4/anime?page=${page}&limit=4`)
+      fetchWithCache(`animePage${page}`, `https://api.jikan.moe/v4/anime?page=${page}&limit=4`),
     ]);
 
     res.render("index.ejs", {
@@ -87,8 +87,19 @@ app.get("/search", async function (req, res) {
   }
 });
 
-app.get("/comic-detail", async (req, res) => {
-  res.render("detailComic.ejs", { year: year });
+app.get("/comic-detail/:id", async (req, res) => {
+  // console.log(req.params.id);
+
+  const animeId = req.params.id
+
+  const anime = await fetchWithCache(
+   "anime",`https://api.jikan.moe/v4/anime/${animeId}`
+  );
+
+  res.render("detailComic.ejs", { 
+    anime: anime.data,
+    year: year,
+  });
 });
 
 app.get("/reading-comic", async (req, res) => {
