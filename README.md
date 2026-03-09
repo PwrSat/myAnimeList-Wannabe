@@ -33,9 +33,17 @@ project-name
 │   └── images (just for testing an image)
 │
 ├── views
-│   └── index.ejs
+│   ├── partials
+│   │   ├── footer.ejs
+│   │   └── header.ejs
+│   │
+│   ├── detailComic.ejs
+│   ├── index.ejs
+│   ├── readComic.ejs (unused file from my past project)
+│   └── search.ejs
 │
 ├── index.js
+├── package-lock.json
 ├── package.json
 └── README.md
 ```
