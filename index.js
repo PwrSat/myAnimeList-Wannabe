@@ -9,44 +9,60 @@ app.use(express.static("public"));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
+
+// function nyimpan cache request
+
+let cache = {};
+let cacheTime = {};
+
+async function fetchWithCache(key, url, duration = 60000) {
+  const now = Date.now();
+
+  if (cache[key] && now - cacheTime[key] < duration) {
+    return cache[key];
+  }
+
+  const response = await axios.get(url);
+
+  cache[key] = response.data;
+  cacheTime[key] = now;
+
+  return response.data;
+}
+
+
+// endpoint
+
 app.get("/", async (req, res) => {
   try {
-
     const page = req.query.page || 1;
 
-    // list api
-    const [topAnime, myAnimePreference, pagePagination] =
+    //list api
+    const [topAnime, myAnimePreference, pagePagination] = 
     await Promise.all([
-      axios.get("https://api.jikan.moe/v4/top/anime?limit=10"),
-      axios.get("https://api.jikan.moe/v4/anime/55830"),
-      axios.get(`https://api.jikan.moe/v4/anime?page=${page}&limit=5`),
+      fetchWithCache("topAnime", "https://api.jikan.moe/v4/top/anime?limit=5"),
+      fetchWithCache("myAnimePreference","https://api.jikan.moe/v4/anime/55830"),
+      fetchWithCache(`animePage${page}`,`https://api.jikan.moe/v4/anime?page=${page}&limit=4`),
     ]);
 
     res.render("index.ejs", {
-      topAnime: topAnime.data.data.slice(0,5),
-      myAnimePreference: myAnimePreference.data.data,
-      pagedAnime: pagePagination.data.data,
-      pagination: pagePagination.data.pagination,
-
-      year: year
+      topAnime: topAnime.data,
+      myAnimePreference: myAnimePreference.data,
+      pagedAnime: pagePagination.data,
+      pagination: pagePagination.pagination,
     });
 
   } catch (err) {
-
     console.log(err);
 
     res.render("index.ejs", {
       topAnime: [],
       myAnimePreference: null,
-      newAnime: [],
       pagedAnime: [],
       pagination: null,
-      year: year
     });
-
   }
 });
-
 
 app.get("/comic-detail", async (req, res) => {
   res.render("detailComic.ejs", { year: year });
