@@ -8,14 +8,8 @@
       <p>
         <%= anime.synopsis %>
       </p>
-      <h3>Statistics:</h3>
-      <ul>
-        <li>Score: <%= anime.score %></li>
-        <li>Ranked: #<%= anime.rank %></li>
-        <li>Popularity: #<%= anime.popularity %></li>
-        <li>Members: <%= anime.members %></li>
-        <li>Favorites: <%= anime.favorites %></li>
-      </ul>
+      
+      
     </div>
     <!-- <button><a href="/reading-comic">Start Reading</a></button> -->
   </div>
@@ -33,6 +27,18 @@
         <li>Genres: Action, Fantasy</li>
         <li>Duration: 24 min. per ep.</li>
       </ul>
+
+      <br>
+
+      <h3>Statistics:</h3>
+      <ul>
+        <li>Score: <%= anime.score %></li>
+        <li>Ranked: #<%= anime.rank %></li>
+        <li>Popularity: #<%= anime.popularity %></li>
+        <li>Members: <%= anime.members %></li>
+        <li>Favorites: <%= anime.favorites %></li>
+      </ul>
+
     </div>
   </div>
   <% }else{ %>

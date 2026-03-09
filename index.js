@@ -88,18 +88,19 @@ app.get("/search", async function (req, res) {
 });
 
 app.get("/comic-detail/:id", async (req, res) => {
-  // console.log(req.params.id);
 
-  const animeId = req.params.id
+  const animeId = req.params.id;
 
   const anime = await fetchWithCache(
-   "anime",`https://api.jikan.moe/v4/anime/${animeId}`
+    `anime-${animeId}`,
+    `https://api.jikan.moe/v4/anime/${animeId}`
   );
 
   res.render("detailComic.ejs", { 
     anime: anime.data,
     year: year,
   });
+
 });
 
 app.get("/reading-comic", async (req, res) => {

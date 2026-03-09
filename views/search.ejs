@@ -10,7 +10,7 @@
         <% pagedAnime.forEach(function(anime){ %>
 
           <li>
-            <a href="/comic-detail">
+            <a href="/comic-detail/<%= anime.mal_id %>">
 
               <img src="<%= anime.images.jpg.image_url %>" height="200px"/>
 
