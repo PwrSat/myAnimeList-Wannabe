@@ -1,0 +1,66 @@
+<%- include('partials/header.ejs') %>
+<div class="wrapper">
+  <h1>Best of the best</h1>
+  <div class="content">
+    <div class="listManga">
+      <ul>
+
+      <% if (pagedAnime && pagedAnime.length > 0) { %>
+
+        <% pagedAnime.forEach(function(anime){ %>
+
+          <li>
+            <a href="/comic-detail">
+
+              <img src="<%= anime.images.jpg.image_url %>" height="200px"/>
+
+              <div class="text">
+
+                <h3><%= anime.title %></h3>
+
+                <h5>Score: <%= anime.score %></h5>
+
+                <p>
+                  <%= anime.synopsis 
+                    ? anime.synopsis.substring(0,120) + "..." 
+                    : "No synopsis" %>
+                </p>
+
+              </div>
+
+            </a>
+          </li>
+
+        <% }) %>
+
+      <% } else { %>
+
+        <p>Nothing to show</p>
+
+      <% } %>
+
+      </ul>
+    </div>
+    <div class="pagginate">
+
+<div class="pagginate">
+
+<% if (pagination && pagination.current_page > 1) { %>
+<a href="/search?q=<%= query %>&page=<%= pagination.current_page - 1 %>">
+<button>Prev</button>
+</a>
+<% } %>
+
+<% if (pagination && pagination.has_next_page) { %>
+<a href="/search?q=<%= query %>&page=<%= pagination.current_page + 1 %>">
+<button>Next</button>
+</a>
+<% } %>
+
+</div>
+
+</div>
+  </div>
+</div>
+
+<%- include('partials/footer.ejs') %>

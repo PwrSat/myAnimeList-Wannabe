@@ -30,14 +30,9 @@
       </ul>
 
       <div class="search">
-        <form action="">
-          <input type="text" id="search" name="searc" placeholder="search" />
-          <input
-            type="submit"
-            id="submit"
-            value="search"
-            formaction="/get-comic"
-          />
+        <form action="/search" method="GET">
+          <input type="text" id="search" name="q" placeholder="search" />
+          <input type="submit" id="submit" value="search"/>
         </form>
       </div>
     </nav>

@@ -9,7 +9,6 @@ app.use(express.static("public"));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
 // function nyimpan cache request
 
 let cache = {};
@@ -30,7 +29,6 @@ async function fetchWithCache(key, url, duration = 60000) {
   return response.data;
 }
 
-
 // endpoint
 
 app.get("/", async (req, res) => {
@@ -38,11 +36,10 @@ app.get("/", async (req, res) => {
     const page = req.query.page || 1;
 
     //list api
-    const [topAnime, myAnimePreference, pagePagination] = 
-    await Promise.all([
+    const [topAnime, myAnimePreference, pagePagination] = await Promise.all([
       fetchWithCache("topAnime", "https://api.jikan.moe/v4/top/anime?limit=5"),
       fetchWithCache("myAnimePreference","https://api.jikan.moe/v4/anime/55830"),
-      fetchWithCache(`animePage${page}`,`https://api.jikan.moe/v4/anime?page=${page}&limit=4`),
+      fetchWithCache(`animePage${page}`,`https://api.jikan.moe/v4/anime?page=${page}&limit=4`)
     ]);
 
     res.render("index.ejs", {
@@ -51,7 +48,6 @@ app.get("/", async (req, res) => {
       pagedAnime: pagePagination.data,
       pagination: pagePagination.pagination,
     });
-
   } catch (err) {
     console.log(err);
 
@@ -60,6 +56,33 @@ app.get("/", async (req, res) => {
       myAnimePreference: null,
       pagedAnime: [],
       pagination: null,
+    });
+  }
+});
+
+app.get("/search", async function (req, res) {
+  try {
+    // console.log(req.query);
+    const inputSearch = req.query.q;
+    const page = req.query.page || 1;
+
+    const pagePagination = await fetchWithCache(
+      `search-${inputSearch}-page-${page}`,
+      `https://api.jikan.moe/v4/anime?q=${inputSearch}&page=${page}&limit=4`,
+    );
+
+    res.render("search.ejs", {
+      pagedAnime: pagePagination.data,
+      pagination: pagePagination.pagination,
+      query: inputSearch,
+    });
+  } catch (err) {
+    console.log(err);
+
+    res.render("search.ejs", {
+      pagedAnime: [],
+      pagination: null,
+      query: "",
     });
   }
 });
