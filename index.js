@@ -14,20 +14,17 @@ app.get("/", async (req, res) => {
 
     const page = req.query.page || 1;
 
-    // Jalankan semua API sekaligus (lebih cepat)
-    const [topAnime, myAnimePreference, newAnime, pagePagination] =
+    // list api
+    const [topAnime, myAnimePreference, pagePagination] =
     await Promise.all([
       axios.get("https://api.jikan.moe/v4/top/anime?limit=10"),
       axios.get("https://api.jikan.moe/v4/anime/55830"),
-      axios.get("https://api.jikan.moe/v4/seasons/now?limit=5"),
-      axios.get(`https://api.jikan.moe/v4/anime?page=${page}&limit=5`)
+      axios.get(`https://api.jikan.moe/v4/anime?page=${page}&limit=5`),
     ]);
 
     res.render("index.ejs", {
       topAnime: topAnime.data.data.slice(0,5),
       myAnimePreference: myAnimePreference.data.data,
-      newAnime: newAnime.data.data,
-
       pagedAnime: pagePagination.data.data,
       pagination: pagePagination.data.pagination,
 
